@@ -5,7 +5,7 @@
 #include <mutex>
 #include <iostream>
 
-/// @brief Static member initializations
+// Static member initializations
 bool Log::_showInfo = false;
 bool Log::_showWarn = false;
 std::source_location _source;
@@ -25,11 +25,10 @@ void Log::init(const std::string& filePath, bool showInfo, bool showWarn) {
 }
 
 void Log::debug(const std::string& message) {
-  if (_showInfo)
-  {
-    std::scoped_lock lock(_consoleMutex);
-    std::cout << cyan() << debugTag() << reset() << " > " << message << std::endl;
-  }
+  #ifdef DEBUG
+  std::scoped_lock lock(_consoleMutex);
+  std::cout << cyan() << debugTag() << reset() << " > " << message << std::endl;
+  #endif
 }
 
 void Log::info(const std::string& message) {

@@ -6,7 +6,6 @@
 #include <string>
 #include <mutex>
 #include <ofstream>
-#include <iostream>
 
 /// @brief Provides thread-safe methods for logging messages at different levels to the console and optionally a file.
 class Log {
@@ -17,7 +16,10 @@ public:
   Log(Log&& other) = delete;
   Log operator=(const Log& other) = delete;
 
-  /// @brief Static initialization method for the log file
+  /// @brief Initializes the logging system with a specified file path and visibility flags for different log levels
+  /// @param filePath File path where logs will be recorded. If left empty, no log file will me used.
+  /// @param showInfo True if info log messages should be printed to the console (file logging will still occur).
+  /// @param showWarn True if warning log messages should be printed to the console (file logging will still occur).
   static void init(const std::string& filePath, bool showInfo, bool showWarn);
 
   // Log methods with different levels
