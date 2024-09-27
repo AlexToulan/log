@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+      {
+          "label": "configure_cmake",
+          "type": "shell",
+          "command": "cmake",
+          "args": [
+              "${workspaceFolder}",  // Path to the root of your project
+              "-DCMAKE_BUILD_TYPE=Debug"  // You can adjust this for release, debug, etc.
+          ],
+          "group": {
+              "kind": "build",
+              "isDefault": true
+          },
+          "problemMatcher": []
+      },
+      {
+          "label": "build_cmake",
+          "type": "shell",
+          "command": "make",  // Or use ninja if you prefer
+          "args": [
+              "-j4"  // Adjust the number of jobs based on your system capabilities
+          ],
+          "group": {
+              "kind": "build",
+              "isDefault": true
+          },
+          "problemMatcher": []
+      }
+  ]
+}

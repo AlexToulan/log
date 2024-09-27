@@ -24,7 +24,7 @@ public:
   /// @param ...vargs Argument pack to be formatted into the string
   /// @return The formatted string
   template<typename... VArgs>
-  static std::string format(const std::string& format, VArgs&&... vargs) {
+  static std::string format(const std::string_view& format, VArgs&&... vargs) {
     std::string out;
     _format(out, format, std::forward<VArgs>(vargs)...);
     return out;
@@ -53,7 +53,7 @@ private:
   /// @param t The first element to add
   /// @param vargs Additional elements to add
   template<typename T, typename... VArgs>
-  static void _format(std::string& out, const std::string& format, T t, VArgs&&... vargs) {
+  static void _format(std::string& out, const std::string_view& format, T t, VArgs&&... vargs) {
     if (_format(out, format, t)) {
       _format(out, format, std::forward<VArgs>(vargs)...);
     }
@@ -65,7 +65,7 @@ private:
   /// @param format The format string containing placeholders
   /// @param t The first element to add
   template<typename T>
-  static bool _format(std::string& out, const std::string& format, T t) {
+  static bool _format(std::string& out, const std::string_view& format, T t) {
     size_t pos = format.find("{}");
     if (pos == std::string::npos) {
       out += format;
